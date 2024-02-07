@@ -10,7 +10,7 @@ function validateMUI(action) {
             if (error) {
                 console.log(chalk.red("Error while reading package.json"), error);
             }
-            const deps = JSON.parse(data);
+            const deps = JSON.parse(data).dependencies;
 
             return deps["@mui/material"] ? action() : promptInstall()
         })

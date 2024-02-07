@@ -2,10 +2,9 @@ const { program } = require('commander');
 const themeInit = require('./commands/themeInit');
 const validateMUI = require('./utils/validateMaterial')
 
-//initialize theme template
-
 program.version("0.0.1").description("Material UI CLI");
 
+//generate theme template
 program
     .command("init-theme")
     .description("Initialize theme")

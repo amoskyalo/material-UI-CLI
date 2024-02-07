@@ -4,7 +4,7 @@ const CLI = require('clui');
 
 Spinner = CLI.Spinner;
 
-function runInstall(package) {
+function runInstall(package, next) {
     const spinner = new Spinner('Installing materila UI...  ', ['⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷']);
 
     spinner.start();
@@ -22,6 +22,7 @@ function runInstall(package) {
         spinner.stop();
         console.log(stdout);
         console.log(chalk.green("Material UI installed successfully!"))
+        next();
     });
 }
 

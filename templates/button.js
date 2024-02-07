@@ -5,13 +5,13 @@ function createButtonElement(componentType, buttonProps) {
         .map(([key, value]) => {
             if (value === true) {
                 return `${key}`;
-            } else if (value === false) {
-                return;
+            } else if (value !== false) {
+                return `${key}={"${value}"}`
             }
-
-            return `${key}={${value}}`;
         })
-        .join('\n        ');
+        .join('\n            ');
+
+    console.log(otherButtonProps)
 
     const reusableComponent = `
     import { Button } from '@mui/material';
@@ -36,7 +36,7 @@ function createButtonElement(componentType, buttonProps) {
         <Button 
             variant="${variant}"
             color="${color || 'primary'}"
-            ${otherPropsString ? `${otherPropsString}` : ''}
+            ${otherPropsString && `${otherPropsString}`}
         >
             ${text}
         </Button>

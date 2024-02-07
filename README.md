@@ -1,3 +1,6 @@
+![image](https://github.com/amoskyalo/material-UI-CLI/assets/91586973/51a5d22b-9699-470f-86c4-b012fd1a17ce)
+![WhatsApp Image 2024-02-07 at 15 15 47_1028611a](https://github.com/amoskyalo/material-UI-CLI/assets/91586973/a1484697-7f96-4a85-8734-2776310fe216)
+
 ## MUI-CLI: Enhance Your Material-UI Experience
 
 MUI-CLI is a dedicated command-line interface tool crafted to augment the development experience with Material-UI, a popular React UI framework. This CLI tool is designed for developers at all levels who are working on React projects and aim to efficiently implement and customize Material-UI themes and components. It streamlines several processes, making it simpler to initiate, customize, validate Material-UI themes, and leverage documentation and examples directly from your terminal.

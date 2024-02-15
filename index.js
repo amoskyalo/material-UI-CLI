@@ -7,7 +7,7 @@ program.version("0.0.1").description("Material UI CLI");
 
 // generate theme template
 program
-    .command("init-theme")
+    .command("theme-init")
     .description("Initialize theme")
     .option("-p, --primary [string], primary color option")
     .option("-s, --secondary [string], secondary color option")

@@ -34,7 +34,7 @@ function themeInit(options) {
             console.log(chalk.green("Theme created successfully at"), themePath)
         })
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 };
 

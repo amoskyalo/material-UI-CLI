@@ -51,13 +51,13 @@ async function validateTheme(options) {
 
     async function getFilePath(filePath) {
         let p;
-        const x = filePath.split(".");
+        const [file, extension] = filePath.split(".");
 
-        if (x[1] === "js") {
+        if (extension === "js") {
             const answer = await confirm({ message: "Do you want to rename your file with .mjs extension?" });
 
             if (answer) {
-                const f = `${x[0]}.mjs`
+                const f = `${file}.mjs`
                 try {
                     await rename(path.join(process.cwd(), filePath), path.join(process.cwd(), f));
                     p = f;

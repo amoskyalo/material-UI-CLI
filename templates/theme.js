@@ -1,16 +1,14 @@
 function createTheme(options) {
   const { primary, secondary, error, warning, info } = options
   const theme = `
-  import { createTheme } from '@mui/material/styles';
-  
   // Welcome to the Material-UI theming template!
   // This is the starting point for defining your application's unique style.
   // Feel free to adjust the color palette, typography, and layout to suit your needs.
   // Need inspiration or guidance? Dive into the Material-UI theming documentation to explore all the powerful features:
   // https://mui.com/material-ui/customization/theming/
   // Happy theming!  
-  
-  const theme = createTheme({
+
+  const themeConfig = {
     palette: {
       primary: {
         main: "${primary}",
@@ -92,10 +90,9 @@ function createTheme(options) {
         }
       }
     },
-    
-  });
-  
-  export default theme;
+  }
+
+  export default themeConfig
 `
   return theme
 }

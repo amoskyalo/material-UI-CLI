@@ -2,26 +2,18 @@ const path = require("path");
 const createTheme = require("../templates/theme");
 const fs = require('fs');
 const chalk = require('chalk');
+const { defaultColors } = require('../utils/constants');
 
 function themeInit(options) {
-    const palette = {
-        primary: "#90caf9",
-        secondary: "#ce93d8",
-        error: "#f44336",
-        warning: "#ffa726",
-        info: "#29b6f6",
-        success: "#66bb6a"
-    }
-
     function updatePalette(color, value) {
-        typeof color === "string" ? palette[color] = value : null;
+        typeof color === "string" ? defaultColors[color] = value : null;
     }
 
     if (Object.entries(options).length > 0) {
         Object.entries(options).forEach(entry => updatePalette(entry[0], entry[1]));
     }
 
-    const theme = createTheme(palette);
+    const theme = createTheme(defaultColors);
 
     const themePath = path.join(process.cwd(), "theme.js");
 

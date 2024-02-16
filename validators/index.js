@@ -17,11 +17,11 @@ async function validator(options, themeFileUrl) {
 
         for (let { name } of options) {
             const d = defaultOptions.find(option => option.name === name);
+
             if (d) {
                 const { errors, warnings } = d.schema(themeConfig[name]);
 
                 Object.entries(errors).forEach(([key, value]) => themeErros[key] = value);
-
                 Object.entries(warnings).forEach(([key, value]) => themeWarnings[key] = value);
             }
         }
@@ -31,9 +31,9 @@ async function validator(options, themeFileUrl) {
 
         const error = Boolean(Object.entries(themeErros).length > 0)
 
-        error ? console.log(chalk.red("\nTheme validation failed due to the following error:\n\t" + `${errorMessage}`)) : console.log(chalk.green('Theme is valid!'));
+        error ? console.log(chalk.red("\nTheme validation failed due to the following error:\n\t" + errorMessage)) : console.log(chalk.green('Theme is valid!'));
 
-        Boolean(warningMessage) ? console.log(chalk.yellow("\n" + `${warningMessage}`)) : null;
+        Boolean(warningMessage) ? console.log(chalk.yellow("\n" + warningMessage)) : null;
 
     } catch (error) {
         console.log(error);

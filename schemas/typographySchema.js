@@ -45,6 +45,7 @@ function typographySchema(typography) {
 
     function getFontSize(v) {
         const font = v.toString();
+
         switch (font) {
             case font.includes('px'): return font.slice(0, font.indexOf('p'));
             case font.includes('%'): return font.slice(0, font.indexOf('%'));
@@ -74,7 +75,6 @@ function typographySchema(typography) {
     objectProperties.forEach(prop => {
         if (!prop.value) {
             warnings[prop.name] = `> Warning: ${prop.name}: not defined in your typography. But don't worry Material UI will use the default properties.`;
-            return;
         }
         else {
             if (typeof prop.value !== 'object') {

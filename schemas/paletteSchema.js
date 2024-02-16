@@ -19,4 +19,4 @@ function paletteSchema(palette) {
     return { warnings, errors };
 };
 
-module.exports = paletteSchema;
+module.exports = paletteSchema; 

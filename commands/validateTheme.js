@@ -1,11 +1,21 @@
 const path = require('path');
+const validator = require('../validators');
 const { rename } = require('fs/promises');
 const { pathToFileURL } = require('url');
 const { input, confirm } = require('@inquirer/prompts');
-const paletteValidator = require('../validators/paletteValidator')
 
 async function validateTheme(options) {
-    const { path: filePath } = options;
+    const { path: filePath, palette, typography, spacing, breakpoints, transition } = options;
+
+    const optionsArr = [
+        { name: 'palette', value: palette },
+        { name: "typography", value: typography },
+        { name: "spacing", value: spacing },
+        { name: "breakpoints", value: breakpoints },
+        { name: "transition", value: transition }
+    ].filter(v => v.value);
+
+    // console.log(optionsArr);
 
     async function getFilePath(filePath) {
         let p;
@@ -38,10 +48,10 @@ async function validateTheme(options) {
     if (!filePath) {
         const filePath = await input({ message: "Provide path to your theme file. Example: './theme/index.js" });
         const themeFileUrl = await getFilePath(filePath);
-        paletteValidator(themeFileUrl);
+        validator(optionsArr, themeFileUrl);
     } else {
         const themeFileUrl = await getFilePath(filePath);
-        paletteValidator(themeFileUrl);
+        validator(optionsArr, themeFileUrl);
     }
 }
 

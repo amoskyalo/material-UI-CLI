@@ -6,13 +6,13 @@ function paletteSchema(palette) {
 
     Object.entries(defaultColors).forEach(([color, value]) => {
         if (!palette[color]) {
-            warnings[color] = `Warning: '${color}' color is missing from the palette. MUI will use default (${value}).`;
+            warnings[color] = `> Warning: '${color}' color is missing from the palette. MUI will use default (${value}).`;
         }
     });
 
     Object.entries(palette).forEach(([key, { main }]) => {
         if (!main) {
-            errors[key] = `Error: '${key}.main' is missing`
+            errors[key] = `> Error: '${key}.main' is missing`
         }
     });
 

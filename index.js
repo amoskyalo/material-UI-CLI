@@ -1,7 +1,14 @@
+#!/usr/bin/env node
+
 const { program } = require('commander');
+const { exec } = require('child_process');
+const { checkbox } = require('@inquirer/prompts');
+const ComponentGenerator = require('./utils/getComponentTemplate')
 const themeInit = require('./commands/themeInit');
 const validateMUI = require('./utils/validateMaterial');
 const validateTheme = require('./commands/validateTheme');
+const projectInit = require('./commands/projectInit');
+const chalk = require('chalk');
 
 program.version("0.0.1").description("Material UI CLI");
 
@@ -25,8 +32,38 @@ program
     .option("-t, --typography [string], validate typography in theme")
     .option("-s, --spacing [string], validate spacing in theme")
     .option("-b, --breakpoints [string], validate breakpoints in theme")
-    .option('-tr, --transition [string], validate transition in theme')
+    .option('-tr, --transitions [string], validate transitions in theme')
     .option('--path [string], path to theme file')
+    .option('--ignore-warn [string], ignore warning in theme')
     .action(options => validateMUI(() => validateTheme(options)));
+
+
+program.command('project-init').description("Create a new react project").action(() => {
+    const appName = process.argv[3];
+
+    if (!appName) {
+        throw new Error("Project name must be provided");
+    }
+
+    projectInit(appName);
+});
+
+program.command('test').action(async() => {
+    // const answers = await checkbox({
+    //     message: "Which components would you want to install?",
+    //     choices: [
+    //         { name: "App Bar", value: { name: "AppBar", category: "Layouts" } },
+    //         { name: "AutoComplete", value: { name: "AutoComplete", category: "Inputs" } },
+    //         { name: "DataGrid", value: { name: "DataGrid", category: "DataDisplay" } },
+    //         { name: "Dates", value: { name: "Dates", category: "Inputs" } },
+    //         { name: "Select", value: { name: "Select", category: "Inputs" } },
+    //         { name: "Tabs", value: { name: "Tabs", category: "Navigation" } },
+    //         { name: "TextField", value: { name: "TextField", category: "Inputs" } }
+    //     ]
+    // });
+
+    // console.log(answers)
+    new ComponentGenerator(["AppBar"], "appName").generateComponent();
+});
 
 program.parse(process.argv);

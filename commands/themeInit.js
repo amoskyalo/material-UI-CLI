@@ -4,7 +4,7 @@ const fs = require('fs');
 const chalk = require('chalk');
 const { defaultColors } = require('../utils/constants');
 
-function themeInit(options) {
+function themeInit(options, showSuccessMessage = true) {
     function updatePalette(color, value) {
         typeof color === "string" ? defaultColors[color] = value : null;
     }
@@ -15,15 +15,15 @@ function themeInit(options) {
 
     const theme = createTheme(defaultColors);
 
-    const themePath = path.join(process.cwd(), "theme.js");
+    const themePath = path.join(process.cwd(), "src", "theme", "theme.js");
 
     try {
         fs.writeFile(themePath, theme, (error, __) => {
             if (error) {
-                console.log(chalk.red("Error while creating theme"), error);
+                throw new Error(error);
             }
 
-            console.log(chalk.green("Theme created successfully at"), themePath)
+            showSuccessMessage && console.log(chalk.green("Theme created successfully at"), themePath)
         })
     } catch (error) {
         console.log(error);

@@ -1,4 +1,5 @@
 const chalk = require("chalk");
+const getNumberFromUnitValues = require('../utils/getNumFromUnitValues');
 
 function typographySchema(typography) {
     //OBJECTIVES:
@@ -43,24 +44,13 @@ function typographySchema(typography) {
         }
     }
 
-    function getFontSize(v) {
-        const font = v.toString();
-
-        switch (font) {
-            case font.includes('px'): return font.slice(0, font.indexOf('p'));
-            case font.includes('%'): return font.slice(0, font.indexOf('%'));
-            case font.includes('rem'): return font.slice(0, font.indexOf('r'));
-            default: return font
-        }
-    }
-
     function validateHeadingHierarchy(headings) {
         let previousSize = Infinity;
         let previousHeading = 'h1';
 
         for (let heading of headings) {
             if (heading && heading.value?.fontSize) {
-                const currentSize = parseFloat(getFontSize(heading.value.fontSize));
+                const currentSize = parseFloat(getNumberFromUnitValues(heading.value.fontSize));
 
                 if (currentSize >= previousSize) {
                     warnings.hierachy = `> Warning: ${heading.name} in typography is not smaller than ${previousHeading}, breaking hierarchy.`

@@ -1,28 +1,24 @@
-const { exec } = require('child_process');
+const { exec, spawn } = require('child_process');
 const chalk = require('chalk');
 const CLI = require('clui');
+const { installMUICommand } = require('../utils/constants')
 
 Spinner = CLI.Spinner;
 
 function runInstall(package, next) {
-    const spinner = new Spinner('Installing materila UI...  ', ['⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷']);
+    console.log(chalk.green("Installing material UI...\n"));
 
-    spinner.start();
+    const child = spawn(
+        package,
+        [package === 'yarn' ? 'add' : 'install', installMUICommand],
+        { stdio: 'inherit', shell: true }
+    );
 
-    const command = "@mui/material @emotion/react @emotion/styled";
-
-    const c = package === "yarn" ? `yarn add ${command}` : `npm install ${command}`;
-
-    exec(c, (error, stdout, __) => {
-        if (error) {
-            spinner.stop();
-            console.log(chalk.red("Error while installing material UI", error))
-        }
-
-        spinner.stop();
-        console.log(stdout);
-        console.log(chalk.green("Material UI installed successfully!"))
-        next();
+    child.on('error', error => {
+        console.log(chalk.red(error));
+    }).on('close', () => {
+        console.log(chalk.green("Material UI installed successfully!\n"))
+        if (typeof next === "function") next();
     });
 }
 

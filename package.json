@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "mui": "./index.js"
+  },
   "keywords": [
     "materialUI",
     "theme",
@@ -18,11 +21,13 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@inquirer/prompts": "^4.0.0",
-    "@mui/material": "^5.15.7",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
     "boxen": "^5.1.2",
     "chalk": "4.1.2",
     "clui": "^0.3.6",
     "commander": "^12.0.0",
+    "ejs": "^3.1.9",
     "joi": "^17.12.1"
   }
 }

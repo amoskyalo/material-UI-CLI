@@ -48,22 +48,22 @@ program.command('project-init').description("Create a new react project").action
     projectInit(appName);
 });
 
-program.command('test').action(async() => {
-    // const answers = await checkbox({
-    //     message: "Which components would you want to install?",
-    //     choices: [
-    //         { name: "App Bar", value: { name: "AppBar", category: "Layouts" } },
-    //         { name: "AutoComplete", value: { name: "AutoComplete", category: "Inputs" } },
-    //         { name: "DataGrid", value: { name: "DataGrid", category: "DataDisplay" } },
-    //         { name: "Dates", value: { name: "Dates", category: "Inputs" } },
-    //         { name: "Select", value: { name: "Select", category: "Inputs" } },
-    //         { name: "Tabs", value: { name: "Tabs", category: "Navigation" } },
-    //         { name: "TextField", value: { name: "TextField", category: "Inputs" } }
-    //     ]
-    // });
+// program.command('test').action(async() => {
+//     // const answers = await checkbox({
+//     //     message: "Which components would you want to install?",
+//     //     choices: [
+//     //         { name: "App Bar", value: { name: "AppBar", category: "Layouts" } },
+//     //         { name: "AutoComplete", value: { name: "AutoComplete", category: "Inputs" } },
+//     //         { name: "DataGrid", value: { name: "DataGrid", category: "DataDisplay" } },
+//     //         { name: "Dates", value: { name: "Dates", category: "Inputs" } },
+//     //         { name: "Select", value: { name: "Select", category: "Inputs" } },
+//     //         { name: "Tabs", value: { name: "Tabs", category: "Navigation" } },
+//     //         { name: "TextField", value: { name: "TextField", category: "Inputs" } }
+//     //     ]
+//     // });
 
-    // console.log(answers)
-    new ComponentGenerator(["AppBar"], "appName").generateComponent();
-});
+//     // console.log(answers)
+//     new ComponentGenerator(["AppBar"], "appName").generateComponent();
+// });
 
 program.parse(process.argv);

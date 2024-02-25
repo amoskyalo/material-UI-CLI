@@ -8,7 +8,7 @@ const themeInit = require('./commands/themeInit');
 const validateMUI = require('./utils/validateMaterial');
 const validateTheme = require('./commands/validateTheme');
 const projectInit = require('./commands/projectInit');
-const chalk = require('chalk');
+const { logger } = require('./utils/logger')
 
 program.version("0.0.1").description("Material UI CLI");
 
@@ -42,7 +42,11 @@ program.command('project-init').description("Create a new react project").action
     const appName = process.argv[3];
 
     if (!appName) {
-        throw new Error("Project name must be provided");
+        console.log()
+
+        logger.error("Project name must be provided");
+
+        process.exit(1);
     }
 
     projectInit(appName);

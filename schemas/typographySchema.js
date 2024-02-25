@@ -1,4 +1,4 @@
-const chalk = require("chalk");
+const { logger } = require('../utils/logger');
 const getNumberFromUnitValues = require('../utils/getNumFromUnitValues');
 
 function typographySchema(typography) {
@@ -9,7 +9,7 @@ function typographySchema(typography) {
     // 4. Ensure hierarchy in headings; done
 
     if (typeof typography !== 'object') {
-        console.log(chalk.red(new Error('Typography validation failed: should be an object but got ' + typeof typography)))
+        logger.error(new Error('Typography validation failed: should be an object but got ' + typeof typography))
     }
 
     const { h1, h2, h3, h4, h5, h6, subtitle1, subtitle2, body1, body2, button, caption, overline, fontSize, inherit } = typography;

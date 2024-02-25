@@ -1,6 +1,6 @@
 const { confirm, select } = require('@inquirer/prompts');
 const runInstall = require('./runInstall');
-const chalk = require('chalk');
+const { logger } = require('../utils/logger')
 
 async function promptInstall(next) {
     const install = await confirm({ message: "Looks like material ui is not installed in your project. Do you want to install it?" });
@@ -23,7 +23,7 @@ async function promptInstall(next) {
         runInstall(package, next);
 
     } else {
-        console.log(chalk.yellow("Material UI needs to be installed in your project."));
+        logger.warn("Material UI needs to be installed in your project.");
         process.exit(0);
     }
 }

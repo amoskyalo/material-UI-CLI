@@ -1,7 +1,7 @@
 const path = require("path");
 const createTheme = require("../templates/theme");
 const fs = require('fs');
-const chalk = require('chalk');
+const { logger } = require('../utils/logger')
 const { defaultColors } = require('../utils/constants');
 
 function themeInit(options, showSuccessMessage = true) {
@@ -23,7 +23,7 @@ function themeInit(options, showSuccessMessage = true) {
                 throw new Error(error);
             }
 
-            showSuccessMessage && console.log(chalk.green("Theme created successfully at"), themePath)
+            showSuccessMessage && logger.success("Theme created successfully at", themePath)
         })
     } catch (error) {
         console.log(error);

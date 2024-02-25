@@ -2,8 +2,7 @@ const paletteSchema = require('../schemas/paletteSchema');
 const typographySchema = require('../schemas/typographySchema');
 const breakpointsSchema = require('../schemas/breakpointsSchema');
 const transitionSchema = require('../schemas/transitionsSchema');
-
-const chalk = require('chalk');
+const { logger } = require('../utils/logger')
 
 const defaultOptions = [
     { name: 'palette', schema: paletteSchema },
@@ -46,9 +45,9 @@ async function validator(options, ignoreWarn, themeFileUrl) {
 
         const error = Boolean(Object.entries(themeErros).length > 0)
 
-        error ? console.log(chalk.red("\nTheme validation failed due to the following errors:\n\t" + errorMessage)) : console.log(chalk.green('Theme is valid!'));
+        error ? logger.error("\nTheme validation failed due to the following errors:\n\t" + errorMessage) : logger.success('Theme is valid!');
 
-        Boolean(warningMessage) && !ignoreWarn ? console.log(chalk.yellow("\n" + warningMessage)) : null;
+        Boolean(warningMessage) && !ignoreWarn ? logger.warn("\n" + warningMessage) : null;
 
     } catch (error) {
         console.log(error);

@@ -11,6 +11,21 @@ const componentsCategories = ["Inputs", "DataDisplay", "Feedback", "Surfaces", "
 
 const installMUICommand = "@mui/icons-material @mui/material @emotion/styled @emotion/react";
 
+const componentChoices = [
+    { name: "App Bar", value: { name: "AppBar", category: "Surfaces" } },
+    { name: "AutoComplete", value: { name: "AutoComplete", category: "Inputs" } },
+    { name: "Data Grid", value: { name: "DataGrid", category: "DataDisplay" } },
+    { name: "Dates", value: { name: "Dates", category: "Inputs" } },
+    { name: "Select", value: { name: "Select", category: "Inputs" } },
+    { name: "Tabs", value: { name: "Tabs", category: "Navigation" } },
+    { name: "Text Field", value: { name: "TextField", category: "Inputs" } },
+    { name: "Alert", value: { name: "Alert", category: "Feedback" } },
+    { name: "Dialog", value: { name: "Dialog", category: "Feedback" } },
+    { name: "Linear Progress", value: { name: "LinearProgress", category: "Feedback" } },
+    { name: "Snackbar", value: { name: "Snackbar", category: "Feedback" } },
+    { name: "Accordion", value: { name: "Accordion", category: "Surfaces" } }
+]
+
 const projectStructure = `
 project-root/
 │
@@ -142,4 +157,11 @@ const durationValidators = [
     }
 ];
 
-module.exports = { defaultColors, durationValidators, installMUICommand, projectStructure, componentsCategories };
+module.exports = {
+    defaultColors,
+    durationValidators,
+    installMUICommand,
+    projectStructure,
+    componentsCategories,
+    componentChoices
+};

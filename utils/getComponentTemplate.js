@@ -14,8 +14,8 @@ class ComponentGenerator {
         this.appName = appName;
     }
 
-    getComponentTemplate(name) {
-        return path.join(__dirname, "..", 'templates', `${name}.ejs`);
+    getComponentTemplate(name, category) {
+        return path.join(__dirname, "..", 'templates', category, `${name}.ejs`);
     }
 
     generateComponent() {
@@ -51,7 +51,7 @@ class ComponentGenerator {
                 })
 
                 this.components.forEach(({ name, category }) => {
-                    const templatePath = this.getComponentTemplate(name);
+                    const templatePath = this.getComponentTemplate(name, category);
 
                     const filesPath = path.join(componentsPath, getCategory(category), `${name}.jsx`);
 

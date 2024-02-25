@@ -1,6 +1,6 @@
-const { exec, spawn } = require('child_process');
+const { spawn } = require('child_process');
 const { checkbox } = require('@inquirer/prompts');
-const CLI = require('clui');
+const { componentChoices } = require('../utils/constants')
 const runInstall = require('../utils/runInstall');
 const chalk = require('chalk');
 const ComponentGenerator = require('../utils/getComponentTemplate');
@@ -46,6 +46,10 @@ async function projectInit(appName) {
 
     const child = spawn('npx', ['create-react-app', appName], { shell: true, stdio: 'inherit' });
 
+    child.on("error", error => {
+        throw new Error(error);
+    });
+
     child.on('close', () => {
         console.log("\n");
 
@@ -54,16 +58,8 @@ async function projectInit(appName) {
 
             runInstall("npm", async () => {
                 const answers = await checkbox({
-                    message: "Which components would you want to install?",
-                    choices: [
-                        { name: "App Bar", value: { name: "AppBar", category: "Layouts" } },
-                        { name: "AutoComplete", value: { name: "AutoComplete", category: "Inputs" } },
-                        { name: "DataGrid", value: { name: "DataGrid", category: "DataDisplay" } },
-                        { name: "Dates", value: { name: "Dates", category: "Inputs" } },
-                        { name: "Select", value: { name: "Select", category: "Inputs" } },
-                        { name: "Tabs", value: { name: "Tabs", category: "Navigation" } },
-                        { name: "TextField", value: { name: "TextField", category: "Inputs" } }
-                    ]
+                    message: "Which components would you like to install to your project?",
+                    choices: componentChoices
                 });
 
                 new ComponentGenerator(answers, appName).generateComponent();

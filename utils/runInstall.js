@@ -1,12 +1,12 @@
-const { exec, spawn } = require('child_process');
-const chalk = require('chalk');
+const { spawn } = require('child_process');
+const { logger } = require('../utils/logger')
 const CLI = require('clui');
 const { installMUICommand } = require('../utils/constants')
 
 Spinner = CLI.Spinner;
 
 function runInstall(package, next) {
-    console.log(chalk.green("Installing material UI...\n"));
+    logger.success("Installing material UI...\n");
 
     const child = spawn(
         package,
@@ -15,9 +15,9 @@ function runInstall(package, next) {
     );
 
     child.on('error', error => {
-        console.log(chalk.red(error));
+        logger.error(error);
     }).on('close', () => {
-        console.log(chalk.green("Material UI installed successfully!\n"))
+        logger.success("Material UI installed successfully!\n");
         if (typeof next === "function") next();
     });
 }

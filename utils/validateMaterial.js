@@ -1,5 +1,5 @@
 const fs = require('fs');
-const chalk = require('chalk');
+const { logger } = require('../utils/logger')
 const promptInstall = require('./promptInstall');
 const CLI = require('clui');
 
@@ -9,7 +9,7 @@ function validateMUI(action) {
     try {
         fs.readFile(packageJsonPath, (error, data) => {
             if (error) {
-                console.log(chalk.red("Error while reading package.json"), error);
+                logger.error("Error while reading package.json", error);
             }
             const deps = JSON.parse(data).dependencies;
 

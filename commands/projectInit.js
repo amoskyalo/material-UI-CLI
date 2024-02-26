@@ -1,8 +1,8 @@
 const { spawn } = require('child_process');
 const { checkbox } = require('@inquirer/prompts');
 const { componentChoices } = require('../utils/constants')
+const { logger } = require('../utils/logger');
 const runInstall = require('../utils/runInstall');
-const chalk = require('chalk');
 const ComponentGenerator = require('../utils/getComponentTemplate');
 
 //OBJECTIVES.
@@ -42,7 +42,7 @@ async function projectInit(appName) {
     //     })
     // });
 
-    console.log(chalk.green("\nSetting up react project..."));
+    logger.success("\nSetting up react project...")
 
     const child = spawn('npx', ['create-react-app', appName], { shell: true, stdio: 'inherit' });
 

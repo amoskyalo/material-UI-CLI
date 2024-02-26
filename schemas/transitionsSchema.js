@@ -4,12 +4,12 @@
 // 3. Validate duration values are of type string or number;
 // 4. Validate predefined durations: (short, shorter, shortest, standard, complex, enteringScreen, leavingScreen);
 
-const chalk = require('chalk');
+const { logger } = require('../utils/logger');
 const { durationValidators } = require('../utils/constants');
 
 function transitionSchema(transition) {
     if (typeof transition !== 'object') {
-        console.log(chalk.red(new Error('Transition validation failed: should be an object but got ' + typeof transition)))
+        logger.error(new Error('Transition validation failed: should be an object but got ' + typeof transition));
     }
 
     const { duration } = transition;

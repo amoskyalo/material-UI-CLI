@@ -4,11 +4,11 @@
 // 3. Validate each preceeding value is greater than the previous value.
 
 const getNumberFromUnitValues = require("../utils/getNumFromUnitValues");
-const chalk = require('chalk');
+const { logger } = require('../utils/logger')
 
 function breakpointsSchema(breakpoints) {
     if (typeof breakpoints !== 'object') {
-        console.log(chalk.red(new Error('Breakpoints validation failed: should be an object but got ' + typeof breakpoints)))
+        logger.error(new Error('Breakpoints validation failed: should be an object but got ' + typeof breakpoints));
     }
 
     const errors = {};
@@ -17,7 +17,7 @@ function breakpointsSchema(breakpoints) {
     const { values } = breakpoints;
 
     if (typeof values !== 'object') {
-        console.log(chalk.red(new Error('Breakpoints validation failed: values should be an object but got ' + typeof values)))
+        logger.error(new Error('Breakpoints validation failed: values should be an object but got ' + typeof values));
     }
 
     const { xs, sm, md, lg, xl } = values;

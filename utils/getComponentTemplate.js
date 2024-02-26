@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const ejs = require('ejs');
-const chalk = require('chalk');
+const { logger } = require('../utils/logger')
 const CLI = require('clui');
 const themeInit = require('../commands/themeInit');
 const { componentsCategories, projectStructure } = require('../utils/constants');
@@ -83,9 +83,9 @@ class ComponentGenerator {
 
         // spinner.stop();
 
-        console.log(chalk.green("Project setup done successfully! Here is your App Structure!\n"));
+        logger.success("Project setup done successfully! Here is your App Structure!\n")
 
-        console.log(chalk.green(projectStructure))
+        logger.success(projectStructure)
 
     }
 }

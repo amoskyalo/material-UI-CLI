@@ -7,7 +7,7 @@ const defaultColors = {
     success: "#66bb6a"
 }
 
-const componentsCategories = ["Inputs", "DataDisplay", "Feedback", "Surfaces", "Navigation", "Layouts"];
+const componentsCategories = ["Inputs", "DataDisplay", "Feedback", "Surfaces", "Navigation", "Layouts", "Switch"];
 
 const installMUICommand = "@mui/icons-material @mui/material @emotion/styled @emotion/react";
 
@@ -23,7 +23,11 @@ const componentChoices = [
     { name: "Dialog", value: { name: "Dialog", category: "Feedback" } },
     { name: "Linear Progress", value: { name: "LinearProgress", category: "Feedback" } },
     { name: "Snackbar", value: { name: "Snackbar", category: "Feedback" } },
-    { name: "Accordion", value: { name: "Accordion", category: "Surfaces" } }
+    { name: "Accordion", value: { name: "Accordion", category: "Surfaces" } },
+    { name: "Android Switch", value: { name: "AndroidSwitch", category: "Switch" } },
+    { name: "Ant Switch", value: { name: "AntSwitch", category: "Switch" } },
+    { name: "iOS Switch", value: { name: "iOSSwitch", category: "Switch" } },
+    { name: "Material UI Switch", value: { name: "MaterialUISwitch", category: "Switch" } }
 ]
 
 const projectStructure = `

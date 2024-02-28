@@ -12,7 +12,7 @@ const ComponentGenerator = require('../utils/getComponentTemplate');
 // 4. Install material UI, and material UI icons;
 // 5. Create components folder and install all components;
 
-async function projectInit(appName) {
+async function projectInit(appName, installAll) {
     // exec('node -v', (error, stdout, stderr) => {
     //     if (error) {
     //         console.log(error);
@@ -57,10 +57,12 @@ async function projectInit(appName) {
             process.chdir(appName);
 
             runInstall("npm", async () => {
-                const answers = await checkbox({
-                    message: "Which components would you like to install to your project?",
-                    choices: componentChoices
-                });
+                const answers = installAll ?
+                    componentChoices.map(c => c.value) :
+                    await checkbox({
+                        message: "Which components would you like to install to your project?",
+                        choices: componentChoices
+                    });
 
                 new ComponentGenerator(answers, appName).generateComponent();
             });
@@ -69,6 +71,7 @@ async function projectInit(appName) {
             throw new Error(error);
         }
     });
+
 }
 
 module.exports = projectInit;

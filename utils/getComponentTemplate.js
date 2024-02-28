@@ -1,10 +1,12 @@
 const fs = require('fs');
 const path = require('path');
 const ejs = require('ejs');
-const { logger } = require('../utils/logger')
 const CLI = require('clui');
 const themeInit = require('../commands/themeInit');
+const getEntryPointContents = require('../templates/appJsContents');
+const getAppCssContents = require('../templates/appCSSContents');
 const { componentsCategories, projectStructure } = require('../utils/constants');
+const { logger } = require('../utils/logger');
 
 Spinner = CLI.Spinner;
 
@@ -24,7 +26,9 @@ class ComponentGenerator {
         // spinner.start();
 
         const componentsPath = path.join(process.cwd(), "src", "Components");
-        const themePath = path.join(process.cwd(), "src", "theme");
+        const themePath = path.join(process.cwd(), "src", "Theme");
+        const appJsEntryPath = path.join(process.cwd(), "src", "App.js");
+        const appCSSPath = path.join(process.cwd(), "src", "App.css")
 
         function getCategory(c) {
             switch (c) {
@@ -34,6 +38,7 @@ class ComponentGenerator {
                 case 'Feedback': return 'Feedback';
                 case 'Surfaces': return 'Surfaces';
                 case 'Navigation': return 'Navigation';
+                case 'Switch': return 'Switch';
             }
         }
 
@@ -51,6 +56,7 @@ class ComponentGenerator {
                 })
 
                 this.components.forEach(({ name, category }) => {
+                    // console.log(name, category)
                     const templatePath = this.getComponentTemplate(name, category);
 
                     const filesPath = path.join(componentsPath, getCategory(category), `${name}.jsx`);
@@ -73,13 +79,28 @@ class ComponentGenerator {
             }
         });
 
+        // create theme
         fs.mkdir(themePath, (error, __) => {
             if (error) {
                 throw new Error(error);
             }
 
             themeInit({}, false);
-        })
+        });
+
+        // write new contents to app.js file
+        fs.writeFile(appJsEntryPath, getEntryPointContents(), (error, __) => {
+            if (error) {
+                throw new Error(error);
+            }
+        });
+
+        // write new content to app.css file
+        fs.writeFile(appCSSPath, getAppCssContents(), (error, __) => {
+            if (error) {
+                throw new Error(error);
+            }
+        });
 
         // spinner.stop();
 

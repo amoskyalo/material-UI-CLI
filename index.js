@@ -3,7 +3,8 @@
 const { program } = require('commander');
 const { exec } = require('child_process');
 const { checkbox } = require('@inquirer/prompts');
-const ComponentGenerator = require('./utils/getComponentTemplate')
+const ComponentGenerator = require('./utils/getComponentTemplate');
+const { componentChoices } = require('./utils/constants')
 const themeInit = require('./commands/themeInit');
 const validateMUI = require('./utils/validateMaterial');
 const validateTheme = require('./commands/validateTheme');
@@ -38,36 +39,28 @@ program
     .action(options => validateMUI(() => validateTheme(options)));
 
 
-program.command('project-init').description("Create a new react project").action(() => {
-    const appName = process.argv[3];
+program.command('project-init')
+    .option('-a, --all, Install all components')
+    .description("Create a new react project")
+    .action((options) => {
+        const appName = process.argv[3];
 
-    if (!appName) {
-        console.log()
+        if (!appName) {
+            logger.error("Project name must be provided");
 
-        logger.error("Project name must be provided");
+            process.exit(1);
+        }
 
-        process.exit(1);
-    }
+        projectInit(appName, options.all || false);
+    });
 
-    projectInit(appName);
+program.command("test").action(async () => {
+    const answers = await checkbox({
+        message: "Which components would you like to install to your project?",
+        choices: componentChoices
+    });
+
+    // new ComponentGenerator(answers, "appName").generateComponent();
+    console.log(answers)
 });
-
-// program.command('test').action(async() => {
-//     // const answers = await checkbox({
-//     //     message: "Which components would you want to install?",
-//     //     choices: [
-//     //         { name: "App Bar", value: { name: "AppBar", category: "Layouts" } },
-//     //         { name: "AutoComplete", value: { name: "AutoComplete", category: "Inputs" } },
-//     //         { name: "DataGrid", value: { name: "DataGrid", category: "DataDisplay" } },
-//     //         { name: "Dates", value: { name: "Dates", category: "Inputs" } },
-//     //         { name: "Select", value: { name: "Select", category: "Inputs" } },
-//     //         { name: "Tabs", value: { name: "Tabs", category: "Navigation" } },
-//     //         { name: "TextField", value: { name: "TextField", category: "Inputs" } }
-//     //     ]
-//     // });
-
-//     // console.log(answers)
-//     new ComponentGenerator(["AppBar"], "appName").generateComponent();
-// });
-
 program.parse(process.argv);

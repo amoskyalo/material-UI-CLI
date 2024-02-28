@@ -1,16 +1,16 @@
 const getPackageManager = () => {
     const userAgent = process.env.npm_config_user_agent || '';
 
-    if(userAgent) {
-        if(userAgent.startsWith('pnpm')) {
+    if (userAgent) {
+        if (userAgent.startsWith('pnpm')) {
             return "pnpm"
         };
 
-        if(userAgent.startsWith('bun')) {
+        if (userAgent.startsWith('bun')) {
             return 'bun'
         };
 
-        if(userAgent.startsWith('yarn')) {
+        if (userAgent.startsWith('yarn')) {
             return 'yarn'
         }
     };

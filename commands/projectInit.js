@@ -2,6 +2,7 @@ const { spawn } = require('child_process');
 const { checkbox } = require('@inquirer/prompts');
 const { componentChoices } = require('../utils/constants')
 const { logger } = require('../utils/logger');
+const { getPackageManager } = require('../utils/getPackageManager');
 const runInstall = require('../utils/runInstall');
 const ComponentGenerator = require('../utils/getComponentTemplate');
 
@@ -56,7 +57,7 @@ async function projectInit(appName, installAll) {
         try {
             process.chdir(appName);
 
-            runInstall("npm", async () => {
+            runInstall(getPackageManager(), async () => {
                 const answers = installAll ?
                     componentChoices.map(c => c.value) :
                     await checkbox({

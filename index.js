@@ -8,7 +8,7 @@ const themeInit = require('./commands/themeInit');
 const validateMUI = require('./utils/validateMaterial');
 const validateTheme = require('./commands/validateTheme');
 const projectInit = require('./commands/projectInit');
-const { logger } = require('./utils/logger')
+const { logger } = require('./utils/logger');
 
 program.version("0.0.1").description("Material UI CLI");
 

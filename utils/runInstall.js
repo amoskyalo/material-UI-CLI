@@ -6,11 +6,11 @@ const { installMUICommand } = require('../utils/constants')
 Spinner = CLI.Spinner;
 
 function runInstall(package, next) {
-    logger.success("Installing material UI...\n");
+    logger.success(`Installing material UI using ${package}...\n`);
 
     const child = spawn(
         package,
-        [package === 'yarn' ? 'add' : 'install', installMUICommand],
+        [['yarn', 'pnpm', 'bun'].includes(package) ? 'add' : 'install', installMUICommand],
         { stdio: 'inherit', shell: true }
     );
 

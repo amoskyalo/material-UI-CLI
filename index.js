@@ -1,15 +1,12 @@
 #!/usr/bin/env node
 
 const { program } = require('commander');
-const { exec } = require('child_process');
-const { checkbox } = require('@inquirer/prompts');
-const ComponentGenerator = require('./utils/getComponentTemplate');
-const { componentChoices } = require('./utils/constants')
+const { getPackageManager } = require('./utils/getPackageManager');
+const { logger } = require('./utils/logger');
 const themeInit = require('./commands/themeInit');
 const validateMUI = require('./utils/validateMaterial');
 const validateTheme = require('./commands/validateTheme');
 const projectInit = require('./commands/projectInit');
-const { logger } = require('./utils/logger');
 
 program.version("0.0.1").description("Material UI CLI");
 
@@ -54,13 +51,6 @@ program.command('project-init')
         projectInit(appName, options.all || false);
     });
 
-program.command("test").action(async () => {
-    const answers = await checkbox({
-        message: "Which components would you like to install to your project?",
-        choices: componentChoices
-    });
+program.command("package").action(() => console.log(getPackageManager()));
 
-    // new ComponentGenerator(answers, "appName").generateComponent();
-    console.log(answers)
-});
 program.parse(process.argv);

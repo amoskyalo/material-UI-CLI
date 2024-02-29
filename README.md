@@ -23,7 +23,7 @@ npm install -g mui-cli
 
 ## 🚀 Usage
 
-### Create new project.
+### 1. Create new project.
 
 To initialize a new project, first navigate to the folder you want to initialize the project, then:
 
@@ -36,7 +36,15 @@ The following options can be passed to the initialization command:
 | Option | Description |
 | --- | --- |
 | name `(required)` | Your project name |
-| --all `(optional)` | Install all components |
+| --all `(optional)` | Install all components flag |
 
-This command will initialize a new cra using your default package manager ( your package manager will be auto-detected, so no need to configure it manually ). 
-If you passed the `--all` flag, the all popular material UI components will be scaffolded into your peoject, else, it will promp you to select the components you want to scaffold to your project.
+This command will initialize a new React app using your default package manager, which will be auto-detected, eliminating the need for manual configuration.
+
+If you include the `--all` flag, all popular Material UI components will be scaffolded into your project. Otherwise, it will prompt you to select the components you wish to include.
+
+Initializing a new React project with the MUI CLI offers several advantages:
+
+- ✅ Enables you to choose which Material UI components to scaffold into your project.
+- 🎨 Includes pre-configured Material UI theming.
+- 🚀 Allows you to focus on development rather than setup.
+ 	

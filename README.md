@@ -37,3 +37,6 @@ The following options can be passed to the initialization command:
 | --- | --- |
 | name `(required)` | Your project name |
 | --all `(optional)` | Install all components |
+
+This command will initialize a new cra using your default package manager ( your package manager will be auto-detected, so no need to configure it manually ). 
+If you passed the `--all` flag, the all popular material UI components will be scaffolded into your peoject, else, it will promp you to select the components you want to scaffold to your project.

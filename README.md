@@ -33,7 +33,7 @@ mui-cli project-init [options]
 
 The following options can be passed to the initialization command:
 
-	| Option | Description |
-	| --- | --- |
- 	| name `(required)` | Your project name |
-	| --all `(optional)` | Install all components |
+| Option | Description |
+| --- | --- |
+| name `(required)` | Your project name |
+| --all `(optional)` | Install all components |

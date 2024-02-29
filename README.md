@@ -44,7 +44,15 @@ If you include the `--all` flag, all popular Material UI components will be scaf
 
 Initializing a new React project with the MUI CLI offers several advantages:
 
+- 📦 Installs all Material UI-related dependencies, including MUI icons, ensuring comprehensive support for Material UI features in your project.
 - ✅ Enables you to choose which Material UI components to scaffold into your project.
+- ⚙️ Automatically generates a theme file.
 - 🎨 Includes pre-configured Material UI theming.
 - 🚀 Allows you to focus on development rather than setup.
- 	
+
+The downside of using MUI CLI to initialize your project includes:
+
+- ⚠️ It relies on **CRA**, which might be a drawback for those intending to use other tools like **Vite**.
+- ⚠️ The scaffolded MUI components are written in **JavaScript**, which could be a downside for those using **TypeScript**.
+
+The MUI CLI team is actively exploring the best ways to address these issues promptly to facilitate smoother development.

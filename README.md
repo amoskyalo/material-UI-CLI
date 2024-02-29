@@ -9,4 +9,3 @@
 	A dedicated command-line interface tool crafted to augment the development experience with Material-UI, a popular React UI framework.
 </p>
 
-https://img.shields.io/badge/-MATERIAL_UI_CLI-blue?logo=mui&logoColor=D9E0EE

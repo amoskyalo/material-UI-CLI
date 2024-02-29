@@ -42,15 +42,15 @@ This command will initialize a new React app using your default package manager,
 
 If you include the `--all` flag, all popular Material UI components will be scaffolded into your project. Otherwise, it will prompt you to select the components you wish to include.
 
-Initializing a new React project with the MUI CLI offers several advantages:
+##### Initializing a new React project with the MUI CLI offers several advantages:
 
-- 📦 Installs all Material UI-related dependencies, including MUI icons, ensuring comprehensive support for Material UI features in your project.
+- 📦 Installs all Material UI-related dependencies, including MUI icons.
 - ✅ Enables you to choose which Material UI components to scaffold into your project.
 - ⚙️ Automatically generates a theme file.
 - 🎨 Includes pre-configured Material UI theming.
 - 🚀 Allows you to focus on development rather than setup.
 
-The downside of using MUI CLI to initialize your project includes:
+##### The downside of using MUI CLI to initialize your project includes:
 
 - ⚠️ It relies on **CRA**, which might be a drawback for those intending to use other tools like **Vite**.
 - ⚠️ The scaffolded MUI components are written in **JavaScript**, which could be a downside for those using **TypeScript**.

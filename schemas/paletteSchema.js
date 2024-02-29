@@ -16,7 +16,7 @@ function paletteSchema(palette) {
     });
 
     Object.entries(palette).forEach(([key, { main }]) => {
-        if (!main) {
+        if (!main && key !== "mode" && key !== "gray") {
             errors[key] = `> Error: '${key}.main' is missing`
         }
     });

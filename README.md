@@ -22,3 +22,18 @@ npm install -g mui-cli
 ```
 
 ## 🚀 Usage
+
+### Create new project.
+
+To initialize a new project, first navigate to the folder you want to initialize the project, then:
+
+```sh
+mui-cli project-init [options]
+```
+
+The following options can be passed to the initialization command:
+
+	| Option | Description |
+	| --- | --- |
+ 	| name `(required)` | Your project name |
+	| --all `(optional)` | Install all components |

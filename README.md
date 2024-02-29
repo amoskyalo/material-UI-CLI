@@ -40,7 +40,13 @@ The following options can be passed to the initialization command:
 
 This command will initialize a new React app using your default package manager, which will be auto-detected, eliminating the need for manual configuration.
 
-If you include the `--all` flag, all popular Material UI components will be scaffolded into your project. Otherwise, it will prompt you to select the components you wish to include.
+If you include the `--all` flag, [all popular Material UI](https://github.com/amoskyalo/material-UI-CLI) components will be scaffolded into your project. Otherwise, it will prompt you to select the components you wish to include.
+
+If everything proceeded smoothly, you'll receive a confirmation message indicating that your project setup is complete. Navigate to the project directory and execute the start script command. If you followed the procedure correctly, your project will initiate at `localhost:3000`, and the default landing page shown below will be displayed:
+
+
+<img alt="Issues" height="200" src="https://github.com/amoskyalo/material-UI-CLI/assets/91586973/5ac71564-b546-4acb-8e22-40726a5e2ee3">
+
 
 #### Initializing a new React project with the MUI CLI offers several advantages:
 

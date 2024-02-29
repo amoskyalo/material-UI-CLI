@@ -9,3 +9,16 @@
 	A dedicated command-line interface tool crafted to augment the development experience with Material-UI, a popular React UI framework.
 </p>
 
+## ✨ Features
+- Initialize projects
+- Generate theme file.
+- Validate theme file.
+- Scaffold popular material ui components to your existing project
+
+## 📦 Installation
+ 
+```sh
+npm install -g mui-cli
+```
+
+## 🚀 Usage

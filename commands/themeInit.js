@@ -15,7 +15,8 @@ function themeInit(options, showSuccessMessage = true) {
 
     const theme = createTheme(defaultColors);
 
-    const themePath = path.join(process.cwd(), "src", "Theme", "index.js");
+    // const themePath = path.join(process.cwd(), "src", "Theme", "index.js");
+    const themePath = path.join(process.cwd(), "theme.js");
 
     try {
         fs.writeFile(themePath, theme, (error, __) => {

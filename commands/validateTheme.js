@@ -15,41 +15,41 @@ async function validateTheme(options) {
         { name: "transitions", value: transitions }
     ].filter(v => v.value);
 
-    async function getFilePath(filePath) {
-        let p;
+    // async function getFilePath(filePath) {
+    //     let p;
 
-        const [file, extension] = filePath.split(".");
+    //     const [file, extension] = filePath.split(".");
 
-        if (extension === "js") {
-            const answer = await confirm({ message: "Do you want to rename your file with .mjs extension?" });
+    //     if (extension === "js") {
+    //         const answer = await confirm({ message: "Do you want to rename your file with .mjs extension?" });
 
-            if (answer) {
-                const f = `${file}.mjs`
-                try {
-                    await rename(path.join(process.cwd(), filePath), path.join(process.cwd(), f));
-                    p = f;
-                } catch (error) {
-                    console.error(error)
-                }
-            } else {
-                process.exit(0);
-            }
-        } else {
-            p = filePath;
-        }
+    //         if (answer) {
+    //             const f = `${file}.mjs`
+    //             try {
+    //                 await rename(path.join(process.cwd(), filePath), path.join(process.cwd(), f));
+    //                 p = f;
+    //             } catch (error) {
+    //                 console.error(error)
+    //             }
+    //         } else {
+    //             process.exit(0);
+    //         }
+    //     } else {
+    //         p = filePath;
+    //     }
 
-        const themePath = path.join(process.cwd(), p);
+    //     const themePath = path.join(process.cwd(), p);
 
-        return pathToFileURL(themePath).href;
-    }
+    //     return pathToFileURL(themePath).href;
+    // }
 
     if (!filePath) {
         const filePath = await input({ message: "Provide path to your theme file. Example: './theme/index.js" });
-        const themeFileUrl = await getFilePath(filePath);
-        validator(optionsArr, ignoreWarn, themeFileUrl);
+        // const themeFileUrl = await getFilePath(filePath);
+        validator(optionsArr, ignoreWarn, filePath);
     } else {
-        const themeFileUrl = await getFilePath(filePath);
-        validator(optionsArr, ignoreWarn, themeFileUrl);
+        // const themeFileUrl = await getFilePath(filePath);
+        validator(optionsArr, ignoreWarn, filePath);
     }
 }
 

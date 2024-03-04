@@ -5,10 +5,6 @@
 	<img alt="Issues" src="https://img.shields.io/github/issues/amoskyalo/material-UI-CLI?style=for-the-badge&logo=gitbook&color=cba6f7&logoColor=D9E0EE&labelColor=302D41"></a>
 </h3>
 
-<p align="">
-	A dedicated command-line interface tool crafted to augment the development experience with Material-UI, a popular React UI framework.
-</p>
-
 # Material-UI CLI: Streamlining Your Development Workflow
 
 The Material-UI CLI is a powerful command-line interface tool designed to significantly streamline and enhance the development process with Material-UI, a renowned React UI framework. This CLI tool simplifies the initialization of new projects, the generation and validation of theme files, and the scaffolding of popular Material-UI components, thereby allowing developers to focus on creating exceptional user interfaces without getting bogged down by the setup and configuration process.

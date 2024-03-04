@@ -11,10 +11,10 @@ The Material-UI CLI is a powerful command-line interface tool designed to signif
 
 
 ## ✨ Comprehensive Feature Set
-- **Project Initialization**: Kickstart your development with a new React project, pre-configured with Material-UI dependencies, allowing for a smooth and rapid setup.
-- **Theme Generation**: Easily generate a theme file for your project, customizable with primary, secondary, error, warning, info, and success color options, laying the foundation for a consistent design system.
-- **Theme Validation**: Ensure your theme file adheres to Material-UI's theming guidelines, with options to validate palette, typography, spacing, breakpoints, and transitions, thus guaranteeing a polished and error-free UI.
-- **Component Scaffolding**: Choose from a wide array of popular Material-UI components to scaffold into your project, organized neatly within your project structure, saving you the hassle of manual setup and configuration.
+- 🚀 **Project Initialization**: Kickstart your development with a new React project, pre-configured with Material-UI dependencies, allowing for a smooth and rapid setup.
+- 🎨 **Theme Generation**: Easily generate a theme file for your project, customizable with primary, secondary, error, warning, info, and success color options, laying the foundation for a consistent design system.
+- ✅ **Theme Validation**: Ensure your theme file adheres to Material-UI's theming guidelines, with options to validate palette, typography, spacing, breakpoints, and transitions, thus guaranteeing a polished and error-free UI.
+- 🛠️ **Component Scaffolding**: Choose from a wide array of popular Material-UI components to scaffold into your project, organized neatly within your project structure, saving you the hassle of manual setup and configuration.
 
 ## 📦 Installation
  

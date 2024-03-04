@@ -1,14 +1,11 @@
-const fs = require('fs');
+const { mkdir, writeFile, readFile } = require('fs').promises;
+const { componentsCategories, projectStructure } = require('../utils/constants');
+const { logger } = require('../utils/logger');
 const path = require('path');
 const ejs = require('ejs');
-const CLI = require('clui');
 const themeInit = require('../commands/themeInit');
 const getEntryPointContents = require('../templates/appJsContents');
 const getAppCssContents = require('../templates/appCSSContents');
-const { componentsCategories, projectStructure } = require('../utils/constants');
-const { logger } = require('../utils/logger');
-
-Spinner = CLI.Spinner;
 
 class ComponentGenerator {
     constructor(components, appName) {
@@ -21,93 +18,80 @@ class ComponentGenerator {
     }
 
     generateComponent() {
-        // const spinner = new Spinner('Seting up components...', ['⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷']);
-
-        // spinner.start();
-
         const componentsPath = path.join(process.cwd(), "src", "Components");
         const themePath = path.join(process.cwd(), "src", "Theme");
         const appJsEntryPath = path.join(process.cwd(), "src", "App.js");
-        const appCSSPath = path.join(process.cwd(), "src", "App.css")
+        const appCSSPath = path.join(process.cwd(), "src", "App.css");
 
-        function getCategory(c) {
-            switch (c) {
-                case 'Layouts': return 'Layouts';
-                case 'Inputs': return 'Inputs';
-                case 'DataDisplay': return 'DataDisplay';
-                case 'Feedback': return 'Feedback';
-                case 'Surfaces': return 'Surfaces';
-                case 'Navigation': return 'Navigation';
-                case 'Switch': return 'Switch';
+        const createComponentsDir = async () => {
+            async function createCategory(category){
+                const categoryPath = path.join(componentsPath, category);
+                try {
+                    await mkdir(categoryPath, { recursive: true });
+                } catch (error) {
+                    throw error;
+                }
+            }
+
+             const createComponentTemplate = async (name, category) =>{
+                const categoryPath = path.join(componentsPath, category);
+                const templatePath = this.getComponentTemplate(name, category);
+                const filesPath = path.join(categoryPath, `${name}.jsx`);
+
+                async function templateRender() {
+                    try {
+                        const template = await readFile(templatePath, 'utf8');
+                        const rendered = ejs.render(template);
+                        return await writeFile(filesPath, rendered, 'utf8');
+                    } catch (error) {
+                        throw error;
+                    }
+                }
+
+                return templateRender();
+            }
+
+            const componentsPromises = this.components.map(c => createComponentTemplate(c.name, c.category));
+            const categoriesPromises = componentsCategories.map(c => createCategory(c))
+
+            return Promise.all([...categoriesPromises, ...componentsPromises])
+        }
+
+        // create theme
+        async function createTheme() {
+            try {
+                await mkdir(themePath);
+                themeInit({}, false);
+            } catch (error) {
+                throw new Error(error);
             }
         }
 
-        fs.mkdir(componentsPath, (error, __) => {
-            if (error) {
-                throw new Error(err);
-            }
-
-            for (let componentCategory of componentsCategories) {
-
-                fs.mkdir(path.join(componentsPath, componentCategory), (error, __) => {
-                    if (error) {
-                        throw new Error(err);
-                    }
-                })
-
-                this.components.forEach(({ name, category }) => {
-                    // console.log(name, category)
-                    const templatePath = this.getComponentTemplate(name, category);
-
-                    const filesPath = path.join(componentsPath, getCategory(category), `${name}.jsx`);
-
-                    fs.readFile(templatePath, 'utf8', (err, template) => {
-                        if (err) {
-                            throw new Error(err);
-                        }
-
-                        const rendered = ejs.render(template);
-
-                        fs.writeFile(filesPath, rendered, 'utf8', (err) => {
-                            if (err) {
-                                throw new Error(err);
-                            }
-                        });
-                    });
-                });
-
-            }
-        });
-
-        // create theme
-        fs.mkdir(themePath, (error, __) => {
-            if (error) {
-                throw new Error(error);
-            }
-
-            themeInit({}, false);
-        });
-
         // write new contents to app.js file
-        fs.writeFile(appJsEntryPath, getEntryPointContents(), (error, __) => {
-            if (error) {
+        async function updateEntryPath() {
+            try {
+                await writeFile(appJsEntryPath, getEntryPointContents())
+            } catch (error) {
                 throw new Error(error);
             }
-        });
+        }
 
         // write new content to app.css file
-        fs.writeFile(appCSSPath, getAppCssContents(), (error, __) => {
-            if (error) {
+        async function updateEntryCSS() {
+            try {
+                await writeFile(appCSSPath, getAppCssContents());
+            } catch (error) {
                 throw new Error(error);
             }
-        });
+        }
 
-        // spinner.stop();
-
-        logger.success("Project setup done successfully! Here is your App Structure!\n")
-
-        logger.success(projectStructure)
-
+        Promise.all([createComponentsDir(), createTheme(), updateEntryCSS(), updateEntryPath()])
+            .then(() => {
+                logger.success("Project setup done successfully! Here is your App Structure!\n")
+                logger.success(projectStructure);
+            }).catch(error => {
+                throw error
+            });
     }
 }
 

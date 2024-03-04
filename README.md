@@ -5,16 +5,31 @@
 	<img alt="Issues" src="https://img.shields.io/github/issues/amoskyalo/material-UI-CLI?style=for-the-badge&logo=gitbook&color=cba6f7&logoColor=D9E0EE&labelColor=302D41"></a>
 </h3>
 
+<p align="">
+	A dedicated command-line interface tool crafted to augment the development experience with Material-UI, a popular React UI framework.
+</p>
+
+# Table of Contents
+- [Introduction](#material-ui-cli-streamlining-your-development-workflow)
+- [Features](https://github.com/amoskyalo/material-UI-CLI?tab=readme-ov-file#-comprehensive-feature-set)
+- [Installation](https://github.com/amoskyalo/material-UI-CLI?tab=readme-ov-file#-installation)
+- [Usage](https://github.com/amoskyalo/material-UI-CLI?tab=readme-ov-file#-usage)
+	- [Create new project](https://github.com/amoskyalo/material-UI-CLI?tab=readme-ov-file#1--create-new-project)
+	- [Generate theme file to an existing project](https://github.com/amoskyalo/material-UI-CLI?tab=readme-ov-file#2-%EF%B8%8F-generate-theme-file-to-an-existing-project)
+	- [Validate theme file in existing project](https://github.com/amoskyalo/material-UI-CLI?tab=readme-ov-file#3--validate-theme-file-in-existing-project)
+	- [Component Scaffolding](https://github.com/amoskyalo/material-UI-CLI?tab=readme-ov-file#3--validate-theme-file-in-existing-project)
+- [Supported MUI components](https://github.com/amoskyalo/material-UI-CLI?tab=readme-ov-file#-popular-mui-components)
+
 # Material-UI CLI: Streamlining Your Development Workflow
 
 The Material-UI CLI is a powerful command-line interface tool designed to significantly streamline and enhance the development process with Material-UI, a renowned React UI framework. This CLI tool simplifies the initialization of new projects, the generation and validation of theme files, and the scaffolding of popular Material-UI components, thereby allowing developers to focus on creating exceptional user interfaces without getting bogged down by the setup and configuration process.
 
 
 ## ✨ Comprehensive Feature Set
-- 🚀 **Project Initialization**: Kickstart your development with a new React project, pre-configured with Material-UI dependencies, allowing for a smooth and rapid setup.
-- 🎨 **Theme Generation**: Easily generate a theme file for your project, customizable with primary, secondary, error, warning, info, and success color options, laying the foundation for a consistent design system.
-- ✅ **Theme Validation**: Ensure your theme file adheres to Material-UI's theming guidelines, with options to validate palette, typography, spacing, breakpoints, and transitions, thus guaranteeing a polished and error-free UI.
-- 🛠️ **Component Scaffolding**: Choose from a wide array of popular Material-UI components to scaffold into your project, organized neatly within your project structure, saving you the hassle of manual setup and configuration.
+- **Project Initialization**: Kickstart your development with a new React project, pre-configured with Material-UI dependencies, allowing for a smooth and rapid setup.
+- **Theme Generation**: Easily generate a theme file for your project, customizable with primary, secondary, error, warning, info, and success color options, laying the foundation for a consistent design system.
+- **Theme Validation**: Ensure your theme file adheres to Material-UI's theming guidelines, with options to validate palette, typography, spacing, breakpoints, and transitions, thus guaranteeing a polished and error-free UI.
+- **Component Scaffolding**: Choose from a wide array of popular Material-UI components to scaffold into your project, organized neatly within your project structure, saving you the hassle of manual setup and configuration.
 
 ## 📦 Installation
  
@@ -120,7 +135,7 @@ Upon inspecting your theme file, any potential errors will be displayed in your 
 > });
 > ```
 
-### 🧩 Popular MUI components
+### 🧩 Supported MUI components
 
 Below is a list of supported components, categorized for ease of understanding and integration.
 
@@ -144,3 +159,4 @@ Below is a list of supported components, categorized for ease of understanding a
 | [MUI Switch](https://mui.com)      | Material UI default switch component.                                    | Switch         |
 
 Components are organized under the `src/Components` directory, with each having its designated folder for easy management and accessibility.
+

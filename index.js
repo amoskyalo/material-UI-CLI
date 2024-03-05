@@ -12,6 +12,7 @@ const validateMUI = require('./utils/validateMaterial');
 const validateTheme = require('./commands/validateTheme');
 const projectInit = require('./commands/projectInit');
 const monorepoInit = require('./commands/monorepoInit');
+const installComponent = require('./commands/installComponent');
 
 Spinner = CLI.Spinner;
 
@@ -44,6 +45,12 @@ program
     .option('--ignore-warn [string], ignore warning in theme')
     .action(options => validateMUI(() => validateTheme(options)));
 
+// install single component to existing project.
+program.command('install component')
+    .description('Install a Material-UI component')
+    .action(() => validateMUI(() => installComponent()));
+
+// initialize new project.
 program.command('project-init')
     .option('-a, --all, Install all components')
     .description("Create a new react project")
@@ -106,7 +113,5 @@ program.command('project-init')
             projectInit(appName, options.all || false, architecture);
         }
     });
-
-program.command("package").action(() => console.log(getPackageManager()));
 
 program.parse(process.argv);

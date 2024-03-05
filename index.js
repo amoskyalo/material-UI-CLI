@@ -7,6 +7,7 @@ const themeInit = require('./commands/themeInit');
 const validateMUI = require('./utils/validateMaterial');
 const validateTheme = require('./commands/validateTheme');
 const projectInit = require('./commands/projectInit');
+const installComponent = require('./commands/installComponent');
 
 program.version("0.0.1").description("Material UI CLI");
 
@@ -50,6 +51,13 @@ program.command('project-init')
 
         projectInit(appName, options.all || false);
     });
+
+    program.command('install component')
+    .description('Install a Material-UI component')
+    .action(() => {
+        validateMUI(() => installComponent());
+    });
+
 
 program.command("package").action(() => console.log(getPackageManager()));
 

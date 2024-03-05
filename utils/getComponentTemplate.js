@@ -24,7 +24,7 @@ class ComponentGenerator {
         const appCSSPath = path.join(process.cwd(), "src", "App.css");
 
         const createComponentsDir = async () => {
-            async function createCategory(category){
+            async function createCategory(category) {
                 const categoryPath = path.join(componentsPath, category);
                 try {
                     await mkdir(categoryPath, { recursive: true });
@@ -33,7 +33,7 @@ class ComponentGenerator {
                 }
             }
 
-             const createComponentTemplate = async (name, category) =>{
+            const createComponentTemplate = async (name, category) => {
                 const categoryPath = path.join(componentsPath, category);
                 const templatePath = this.getComponentTemplate(name, category);
                 const filesPath = path.join(categoryPath, `${name}.jsx`);
@@ -63,7 +63,7 @@ class ComponentGenerator {
                 await mkdir(themePath);
                 themeInit({}, false);
             } catch (error) {
-                throw new Error(error);
+                throw error
             }
         }
 
@@ -72,7 +72,7 @@ class ComponentGenerator {
             try {
                 await writeFile(appJsEntryPath, getEntryPointContents())
             } catch (error) {
-                throw new Error(error);
+                throw error
             }
         }
 
@@ -81,7 +81,7 @@ class ComponentGenerator {
             try {
                 await writeFile(appCSSPath, getAppCssContents());
             } catch (error) {
-                throw new Error(error);
+                throw error
             }
         }
 

@@ -13,7 +13,7 @@ const ComponentGenerator = require('../utils/getComponentTemplate');
 // 4. Install material UI, and material UI icons;
 // 5. Create components folder and install all components;
 
-async function projectInit(appName, installAll) {
+async function projectInit(appName, installAll, architecture) {
     // exec('node -v', (error, stdout, stderr) => {
     //     if (error) {
     //         console.log(error);
@@ -43,9 +43,18 @@ async function projectInit(appName, installAll) {
     //     })
     // });
 
+    function getCommand() {
+        switch (architecture) {
+            case 'mono-repo': return { command: "yarn", args: ["create", "react-app", appName] };
+            default: return { command: "npx", args: ["create-react-app", appName] }
+        }
+    }
+
+    const { command, args } = getCommand();
+
     logger.success("\nSetting up react project...")
 
-    const child = spawn('npx', ['create-react-app', appName], { shell: true, stdio: 'inherit' });
+    const child = spawn(command, args, { shell: true, stdio: 'inherit' });
 
     child.on("error", error => {
         throw new Error(error);
@@ -57,7 +66,7 @@ async function projectInit(appName, installAll) {
         try {
             process.chdir(appName);
 
-            runInstall(getPackageManager(), async () => {
+            runInstall(architecture === "mono-repo" ? "yarn" : getPackageManager(), async () => {
                 const answers = installAll ?
                     componentChoices.map(c => c.value) :
                     await checkbox({

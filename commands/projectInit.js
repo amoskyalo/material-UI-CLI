@@ -54,7 +54,7 @@ async function projectInit(appName, installAll, architecture) {
 
     logger.success("\nSetting up react project...")
 
-    const child = spawn(command, args, { shell: true, stdio: 'inherit' });
+    const child = spawn("npx", ["create-react-app", appName], { shell: true, stdio: 'inherit' });
 
     child.on("error", error => {
         throw new Error(error);
@@ -66,7 +66,7 @@ async function projectInit(appName, installAll, architecture) {
         try {
             process.chdir(appName);
 
-            runInstall(architecture === "mono-repo" ? "yarn" : getPackageManager(), async () => {
+            runInstall(getPackageManager(), async () => {
                 const answers = installAll ?
                     componentChoices.map(c => c.value) :
                     await checkbox({
@@ -74,7 +74,7 @@ async function projectInit(appName, installAll, architecture) {
                         choices: componentChoices
                     });
 
-                new ComponentGenerator(answers, appName).generateComponent();
+                new ComponentGenerator(answers, appName, architecture).generateComponent();
             });
 
         } catch (error) {

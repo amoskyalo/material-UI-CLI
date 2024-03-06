@@ -42,11 +42,7 @@ function monorepoInit(monorepoName, next) {
                 }
             }
 
-            Promise.all([createPackagesFolder(), updateLernaJson()]).then(() => {
-                process.chdir('packages');
-
-                next();
-            }).catch((error) => { throw error });
+            Promise.all([createPackagesFolder(), updateLernaJson()]).then(() => next()).catch((error) => { throw error });
         })
     }).catch((error) => { throw error });
 };

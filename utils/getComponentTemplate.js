@@ -1,20 +1,76 @@
-const { mkdir, writeFile, readFile } = require('fs').promises;
+const { mkdir, writeFile, readFile, rename } = require('fs').promises;
 const { componentsCategories, projectStructure } = require('../utils/constants');
 const { logger } = require('../utils/logger');
+const { exec } = require('child_process');
+const CLI = require('clui');
 const path = require('path');
 const ejs = require('ejs');
 const themeInit = require('../commands/themeInit');
 const getEntryPointContents = require('../templates/appJsContents');
 const getAppCssContents = require('../templates/appCSSContents');
 
+Spinner = CLI.Spinner;
+
+const spinner = new Spinner("Completing project setup. Please hold on, we're almost done!", ['⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷']);
 class ComponentGenerator {
-    constructor(components, appName) {
+    constructor(components, appName, architecture) {
         this.components = components;
         this.appName = appName;
+        this.architecture = architecture;
     }
 
     getComponentTemplate(name, category) {
         return path.join(__dirname, "..", 'templates', category, `${name}.ejs`);
+    }
+
+    finishProjectSetup() {
+        if (this.architecture === 'mono-repo') {
+            process.chdir("..");
+
+            spinner.start();
+
+            const moveProject = async () => {
+                try {
+                    await rename(path.join(process.cwd(), this.appName), path.join(process.cwd(), "packages", this.appName));
+                } catch (error) {
+                    throw error;
+                }
+            }
+
+            function lernaClean() {
+                return new Promise((resolve, reject) => {
+                    exec('lerna clean -y', (error) => {
+                        if (error) {
+                            reject(error)
+                        } else {
+                            resolve();
+                        }
+                    });
+                })
+            }
+
+            function installModules() {
+                return new Promise((resolve, reject) => {
+                    exec('npm install', (error) => {
+                        if (error) {
+                            reject(error)
+                        } else {
+                            resolve();
+                        }
+                    })
+                });
+            }
+
+            Promise.all([moveProject(), lernaClean(), installModules()]).then(() => {
+                spinner.stop();
+                logger.info("Your monorepo project was created successfully!")
+            }).catch((error) => {
+                throw new Error(error);
+            });
+        }
+        else {
+            logger.success("Project setup done successfully!");
+        }
     }
 
     generateComponent() {
@@ -87,8 +143,7 @@ class ComponentGenerator {
 
         Promise.all([createComponentsDir(), createTheme(), updateEntryCSS(), updateEntryPath()])
             .then(() => {
-                logger.success("Project setup done successfully! Here is your App Structure!\n")
-                logger.success(projectStructure);
+                this.finishProjectSetup();
             }).catch(error => {
                 throw error
             });

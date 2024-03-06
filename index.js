@@ -101,12 +101,18 @@ program.command('project-init')
                                 logger.info(stdout);
                                 lerna_spinner.stop();
 
-                                monorepoInit(monorepoName, () => projectInit(appName, options.all || false, architecture));
+                                monorepoInit(
+                                    monorepoName,
+                                    () => projectInit(appName, options.all || false, architecture)
+                                );
                             })
                         }
                     }
 
-                    monorepoInit(monorepoName, () => projectInit(appName, options.all || false, architecture));
+                    monorepoInit(
+                        monorepoName,
+                        () => projectInit(appName, options.all || false, architecture)
+                    );
                 })
             }
         } else {

@@ -12,7 +12,7 @@ const componentsCategories = ["Inputs", "DataDisplay", "Feedback", "Surfaces", "
 const installMUICommand = "@mui/icons-material @mui/material @emotion/styled @emotion/react";
 
 const componentChoices = [
-    { name: "App Bar", value: { name: "AppBar", category: "Inputs" } },
+    { name: "App Bar", value: { name: "AppBar", category: "Surfaces" } },
     { name: "AutoComplete", value: { name: "AutoComplete", category: "Inputs" } },
     { name: "Data Grid", value: { name: "DataGrid", category: "DataDisplay" } },
     { name: "Dates", value: { name: "Dates", category: "Inputs" } },

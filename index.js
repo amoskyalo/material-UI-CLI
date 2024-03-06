@@ -46,9 +46,11 @@ program
     .action(options => validateMUI(() => validateTheme(options)));
 
 // install single component to existing project.
-program.command('install component')
+program.command('install <componentName>')
     .description('Install a Material-UI component')
-    .action(() => validateMUI(() => installComponent()));
+    .action((componentName) => {
+        validateMUI(() => installComponent(componentName));
+    });
 
 // initialize new project.
 program.command('project-init')
@@ -104,9 +106,9 @@ program.command('project-init')
                                 monorepoInit(monorepoName, () => projectInit(appName, options.all || false, architecture));
                             })
                         }
+                    }else {
+                        monorepoInit(monorepoName, () => projectInit(appName, options.all || false, architecture));
                     }
-
-                    monorepoInit(monorepoName, () => projectInit(appName, options.all || false, architecture));
                 })
             }
         } else {

@@ -6,17 +6,18 @@ const CLI = require('clui');
 const path = require('path');
 const ejs = require('ejs');
 const themeInit = require('../commands/themeInit');
-const getEntryPointContents = require('../templates/appJsContents');
-const getAppCssContents = require('../templates/appCSSContents');
+const getEntryPointContents = require('../templates/Landing/ReactJsContents');
+const getAppCssContents = require('../templates/Landing/ReactCSSContents');
 
 Spinner = CLI.Spinner;
 
 const spinner = new Spinner("Completing project setup. Please hold on, we're almost done!", ['⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷']);
 class ComponentGenerator {
-    constructor(components, appName, architecture) {
+    constructor(components, appName, tool, architecture) {
         this.components = components;
         this.appName = appName;
         this.architecture = architecture;
+        this.tool = tool;
     }
 
     getComponentTemplate(name, category) {

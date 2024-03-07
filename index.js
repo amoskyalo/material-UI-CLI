@@ -55,7 +55,7 @@ program.command('install <componentName>')
 // initialize new project.
 program.command('project-init')
     .option('-a, --all, Install all components')
-    .description("Create a new react project")
+    .description("Initialize a new project")
     .action(async (options) => {
         const appName = process.argv[3];
 
@@ -78,7 +78,7 @@ program.command('project-init')
             message: "Choose your preferred project architecture:",
             choices: [
                 { name: "Monorepo", value: "mono-repo" },
-                { name: "Polyrepo", value: "poly-repo" }
+                { name: "Poly repo", value: "poly-repo" }
             ]
         });
 
@@ -90,17 +90,20 @@ program.command('project-init')
             const useWorkspaces = await confirm({ message: "Would you like to integrate Yarn Workspaces with Lerna for better dependency management?" });
 
             if (useWorkspaces) {
-                exec("lerna --version", async (error, stdout, stderr) => {
+                exec("lerna --version", async (error) => {
                     if (error && error.message.includes("'lerna' is not recognized")) {
                         const installLerna = await confirm({ message: "Lerna could not be found in your machine. Would you like to install it?" });
+
                         if (installLerna) {
                             lerna_spinner.start();
-                            exec('npm install -g lerna', (error, stdout, stderr) => {
+
+                            exec('npm install -g lerna', (error, stdout) => {
                                 if (error) {
                                     throw new Error(error);
                                 }
 
                                 logger.info(stdout);
+
                                 lerna_spinner.stop();
 
                                 monorepoInit(
@@ -112,8 +115,6 @@ program.command('project-init')
                     } else {
                         monorepoInit(monorepoName, () => projectInit(appName, options.all || false, architecture));
                     }
-
-                    monorepoInit(monorepoName, () => projectInit(appName, options.all || false, architecture));
                 })
             }
         } else {

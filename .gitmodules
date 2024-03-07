@@ -1,3 +1,6 @@
-[submodule "vite-template"]
-	path = vite-template
-	url = https://github.com/amoskyalo/vite-template.git
+[submodule "templates/mui-cra-template"]
+	path = templates/mui-cra-template
+	url = https://github.com/amoskyalo/mui-cra-template
+[submodule "templates/vite-js"]
+	path = templates/vite-js
+	url = https://github.com/amoskyalo/vite-template

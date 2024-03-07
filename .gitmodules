@@ -1,0 +1,3 @@
+[submodule "vite-template"]
+	path = vite-template
+	url = https://github.com/amoskyalo/vite-template.git

@@ -2,7 +2,6 @@
 
 const { exec } = require('child_process')
 const { program } = require('commander');
-const { getPackageManager } = require('./utils/getPackageManager');
 const { logger } = require('./utils/logger');
 const { select, confirm, input } = require('@inquirer/prompts');
 const CLI = require('clui');
@@ -20,7 +19,6 @@ const lerna_spinner = new Spinner('Installing lerna...  ', ['⣾', '⣽', '⣻',
 
 program.version("0.0.1").description("Material UI CLI");
 
-// generate theme template
 program
     .command("theme-init")
     .description("Initialize theme")
@@ -32,7 +30,6 @@ program
     .option("-x, --success [string], success color option")
     .action(options => validateMUI(() => themeInit(options)));
 
-//validate theme;
 program
     .command("theme-validate")
     .description("Validate theme")
@@ -45,25 +42,17 @@ program
     .option('--ignore-warn [string], ignore warning in theme')
     .action(options => validateMUI(() => validateTheme(options)));
 
-// install single component to existing project.
 program.command('install <componentName>')
     .description('Install a Material-UI component')
     .action((componentName) => {
         validateMUI(() => installComponent(componentName));
     });
 
-// initialize new project.
 program.command('project-init')
     .option('-a, --all, Install all components')
     .description("Initialize a new project")
     .action(async (options) => {
-        const appName = process.argv[3];
-
-        if (!appName) {
-            logger.error("Project name must be provided");
-
-            process.exit(1);
-        }
+        const projectName = await input({ message: "Project name:", default: "mui-project" });
 
         const tool = await select({
             message: "Choose your preferred tool for your project:",
@@ -72,7 +61,7 @@ program.command('project-init')
                 { name: "Vite", value: "vite" },
                 { name: "Next.js", value: "next.js" }
             ]
-        });
+        }); 
 
         const architecture = await select({
             message: "Choose your preferred project architecture:",
@@ -85,9 +74,14 @@ program.command('project-init')
         if (architecture === "mono-repo") {
             logger.info(boxen(`Since you've chosen a monorepo setup, we'll use Lerna to manage our packages. Lerna is ideal for monorepo management, simplifying tasks like versioning and publishing. Check out the docs: https://lerna.js.org/docs/getting-started`, { padding: 1 }))
 
-            const monorepoName = await input({ message: "Enter your monorepo app name" });
+            const monorepoName = await input({ message: "Enter your monorepo app name", default: "mui-apps" });
 
             const useWorkspaces = await confirm({ message: "Would you like to integrate Yarn Workspaces with Lerna for better dependency management?" });
+
+            function runMonorepo() {
+                return monorepoInit(monorepoName, () => projectInit(projectName, options.all || false, architecture, tool, monorepoName));
+            }
+
 
             if (useWorkspaces) {
                 exec("lerna --version", async (error) => {
@@ -106,19 +100,15 @@ program.command('project-init')
 
                                 lerna_spinner.stop();
 
-                                monorepoInit(
-                                    monorepoName,
-                                    () => projectInit(appName, options.all || false, architecture)
-                                );
+                                runMonorepo();
                             })
                         }
-                    } else {
-                        monorepoInit(monorepoName, () => projectInit(appName, options.all || false, architecture));
-                    }
+                        
+                    } else runMonorepo();
                 })
             }
         } else {
-            projectInit(appName, options.all || false, architecture);
+            projectInit(projectName, options.all || false, architecture, tool);
         }
     });
 

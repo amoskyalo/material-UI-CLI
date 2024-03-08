@@ -45,7 +45,6 @@ const themeConfig = (mode= 'dark') => (
       },
     },
     typography: {
-      fontFamily: [].join(','),
       fontSize: 16,
       h4: {
         fontWeight: 700

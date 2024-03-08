@@ -1,27 +1,27 @@
 const { mkdir, writeFile, readFile, rename } = require('fs').promises;
-const { componentsCategories, projectStructure } = require('../utils/constants');
+const { componentsCategories } = require('../utils/constants');
 const { logger } = require('../utils/logger');
 const { exec } = require('child_process');
 const CLI = require('clui');
 const path = require('path');
 const ejs = require('ejs');
 const themeInit = require('../commands/themeInit');
-const getEntryPointContents = require('../templates/Landing/ReactJsContents');
-const getAppCssContents = require('../templates/Landing/ReactCSSContents');
+const chalk = require('chalk');
 
 Spinner = CLI.Spinner;
 
 const spinner = new Spinner("Completing project setup. Please hold on, we're almost done!", ['⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷']);
 class ComponentGenerator {
-    constructor(components, appName, tool, architecture) {
+    constructor(components, projectName, architecture, tool, monorepoName) {
         this.components = components;
-        this.appName = appName;
+        this.projectName = projectName;
         this.architecture = architecture;
+        this.monorepoName = monorepoName;
         this.tool = tool;
     }
 
     getComponentTemplate(name, category) {
-        return path.join(__dirname, "..", 'templates', category, `${name}.ejs`);
+        return path.join(__dirname, "..", 'components', category, `${name}.ejs`);
     }
 
     finishProjectSetup() {
@@ -32,7 +32,7 @@ class ComponentGenerator {
 
             const moveProject = async () => {
                 try {
-                    await rename(path.join(process.cwd(), this.appName), path.join(process.cwd(), "packages", this.appName));
+                    await rename(path.join(process.cwd(), this.projectName), path.join(process.cwd(), "packages", this.projectName));
                 } catch (error) {
                     throw error;
                 }
@@ -50,35 +50,25 @@ class ComponentGenerator {
                 })
             }
 
-            function installModules() {
-                return new Promise((resolve, reject) => {
-                    exec('npm install', (error) => {
-                        if (error) {
-                            reject(error)
-                        } else {
-                            resolve();
-                        }
-                    })
-                });
-            }
-
-            Promise.all([moveProject(), lernaClean(), installModules()]).then(() => {
+            Promise.all([moveProject(), lernaClean()]).then(() => {
                 spinner.stop();
-                logger.info("Your monorepo project was created successfully!")
+                console.log(chalk.green("success:"), "Your monorepo project was created successfully!");
+                console.log("Run the following commands to get started:");
+                logger.info(`\n\tcd ${this.monorepoName}\n\tnpm install\n\tlerna run start --scope <package name>\n`);
             }).catch((error) => {
                 throw new Error(error);
             });
         }
         else {
-            logger.success("Project setup done successfully!");
+            console.log(chalk.green("info"), "Project setup done successfully!");
+            console.log("You can run the following commands to get started:");
+            logger.info(`\n\tcd ${this.projectName}\n\tnpm install\n\t${this.tool === "cra" ? "npm start" : "npm run dev"}\n`)
         }
     }
 
     generateComponent() {
         const componentsPath = path.join(process.cwd(), "src", "Components");
         const themePath = path.join(process.cwd(), "src", "Theme");
-        const appJsEntryPath = path.join(process.cwd(), "src", "App.js");
-        const appCSSPath = path.join(process.cwd(), "src", "App.css");
 
         const createComponentsDir = async () => {
             async function createCategory(category) {
@@ -114,7 +104,6 @@ class ComponentGenerator {
             return Promise.all([...categoriesPromises, ...componentsPromises])
         }
 
-        // create theme
         async function createTheme() {
             try {
                 await mkdir(themePath);
@@ -124,30 +113,11 @@ class ComponentGenerator {
             }
         }
 
-        // write new contents to app.js file
-        async function updateEntryPath() {
-            try {
-                await writeFile(appJsEntryPath, getEntryPointContents())
-            } catch (error) {
-                throw error
-            }
-        }
-
-        // write new content to app.css file
-        async function updateEntryCSS() {
-            try {
-                await writeFile(appCSSPath, getAppCssContents());
-            } catch (error) {
-                throw error
-            }
-        }
-
-        Promise.all([createComponentsDir(), createTheme(), updateEntryCSS(), updateEntryPath()])
-            .then(() => {
-                this.finishProjectSetup();
-            }).catch(error => {
-                throw error
-            });
+        Promise.all([createComponentsDir(), createTheme()]).then(() => {
+            this.finishProjectSetup();
+        }).catch(error => {
+            throw error
+        });
     }
 }
 

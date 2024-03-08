@@ -1,5 +1,5 @@
 const path = require("path");
-const createTheme = require("../templates/theme");
+const createTheme = require("../components/theme");
 const fs = require('fs');
 const { logger } = require('../utils/logger')
 const { defaultColors } = require('../utils/constants');

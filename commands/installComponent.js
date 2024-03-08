@@ -1,8 +1,8 @@
 const { input } = require('@inquirer/prompts');
-const path = require('path');
-const fs = require('fs-extra');
 const { logger } = require('../utils/logger');
 const { componentChoices } = require('../utils/constants');
+const path = require('path');
+const fs = require('fs-extra');
 const ComponentGenerator = require('../utils/singleComponentTemplate');
 
 async function installComponent(componentName) {

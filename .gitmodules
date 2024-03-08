@@ -4,3 +4,6 @@
 [submodule "templates/vite-js"]
 	path = templates/vite-js
 	url = https://github.com/amoskyalo/vite-template
+[submodule "templates/mui-next-template"]
+	path = templates/mui-next-template
+	url = https://github.com/amoskyalo/mui-next-template

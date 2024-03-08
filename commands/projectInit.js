@@ -8,8 +8,9 @@ async function projectInit(projectName, installAll, architecture, tool, monorepo
     function getTemplateUrl() {
         switch (tool) {
             case 'cra': return "https://github.com/amoskyalo/mui-cra-template";
-            case 'vite': return "https://github.com/amoskyalo/vite-template"
-            default: return null;
+            case 'vite': return "https://github.com/amoskyalo/vite-template";
+            case 'next': return "https://github.com/amoskyalo/mui-next-template";
+            default:  throw new Error("Unknown tool:" + tool);
         }
     }
 

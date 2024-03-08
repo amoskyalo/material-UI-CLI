@@ -59,7 +59,7 @@ program.command('project-init')
             choices: [
                 { name: "CRA", value: "cra" },
                 { name: "Vite", value: "vite" },
-                { name: "Next.js", value: "next.js" }
+                { name: "Next.js", value: "next" }
             ]
         }); 
 

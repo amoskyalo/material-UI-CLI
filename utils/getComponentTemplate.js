@@ -2,6 +2,7 @@ const { mkdir, writeFile, readFile, rename } = require('fs').promises;
 const { componentsCategories } = require('../utils/constants');
 const { logger } = require('../utils/logger');
 const { exec } = require('child_process');
+const getNextThemeConfigFile = require('../components/Theme/nextThemeConfig');
 const CLI = require('clui');
 const path = require('path');
 const ejs = require('ejs');
@@ -104,9 +105,12 @@ class ComponentGenerator {
             return Promise.all([...categoriesPromises, ...componentsPromises])
         }
 
-        async function createTheme() {
+        const createTheme = async () => {
             try {
                 await mkdir(themePath);
+                this.tool === "next" ?
+                    await writeFile(path.join(themePath, "config.js"), getNextThemeConfigFile())
+                    : null;
                 themeInit({}, false);
             } catch (error) {
                 throw error

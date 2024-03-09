@@ -3,7 +3,8 @@
 const { exec } = require('child_process')
 const { program } = require('commander');
 const { logger } = require('./utils/logger');
-const { select, confirm, input } = require('@inquirer/prompts');
+const { select, confirm, input, checkbox } = require('@inquirer/prompts');
+const { componentChoices } = require('./utils/constants');
 const CLI = require('clui');
 const boxen = require('boxen');
 const themeInit = require('./commands/themeInit');
@@ -60,8 +61,15 @@ program.command('project-init')
                 { name: "CRA", value: "cra" },
                 { name: "Vite", value: "vite" },
                 { name: "Next.js", value: "next" }
-            ]
-        }); 
+            ],
+            default: 'vite'
+        });
+
+        const components = await checkbox({
+            message: "Which components would you like to scafold to your project? You can also install them later via the CLI.",
+            choices: componentChoices,
+            pageSize: 10
+        });
 
         const architecture = await select({
             message: "Choose your preferred project architecture:",
@@ -79,7 +87,7 @@ program.command('project-init')
             const useWorkspaces = await confirm({ message: "Would you like to integrate Yarn Workspaces with Lerna for better dependency management?" });
 
             function runMonorepo() {
-                return monorepoInit(monorepoName, () => projectInit(projectName, options.all || false, architecture, tool, monorepoName));
+                return monorepoInit(monorepoName, () => projectInit(projectName, components, architecture, tool, monorepoName));
             }
 
 
@@ -103,12 +111,12 @@ program.command('project-init')
                                 runMonorepo();
                             })
                         }
-                        
+
                     } else runMonorepo();
                 })
             }
         } else {
-            projectInit(projectName, options.all || false, architecture, tool);
+            projectInit(projectName, components, architecture, tool);
         }
     });
 

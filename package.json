@@ -1,6 +1,6 @@
 {
   "name": "material-cli",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Build Material UI apps 10x faster with material-ui-cli ⚡",
   "main": "index.js",
   "scripts": {

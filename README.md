@@ -34,7 +34,7 @@ The Material-UI CLI is a powerful command-line interface tool designed to signif
 ## 📦 Installation
  
 ```sh
-npm install -g mui-cli
+npm i -g material-cli
 ```
 
 ## 🚀 Usage
@@ -44,7 +44,7 @@ npm install -g mui-cli
 To initialize a new project, first, navigate to the desired folder, then:
 
 ```sh
-mui-cli project-init [options]
+material-cli project-init [options]
 ```
 
 The available options for the initialization command are:
@@ -72,7 +72,6 @@ If everything proceeded smoothly, you'll receive a confirmation message indicati
 
 #### The downside of using MUI CLI to initialize your project includes:
 
-- ⚠️ It relies on **CRA (Create React App)**, which might be a drawback for those intending to use other tools like **Vite**.
 - ⚠️ The scaffolded MUI components are written in **JavaScript**, which could be a downside for those using **TypeScript**.
 
 The MUI CLI team is actively exploring the best ways to address these issues promptly to facilitate smoother development.
@@ -82,7 +81,7 @@ The MUI CLI team is actively exploring the best ways to address these issues pro
 Ensuring adherence to the correct MUI theming guidelines can sometimes be challenging. With MUI CLI, you can effortlessly generate a theme file that you can then customize to your preferences. To generate a `theme` file for your existing project, simply execute the following command:
 
 ```sh
-mui-cli theme-init [options]
+material-cli theme-init [options]
 ```
 
 The following **options** can be passed to the command: 
@@ -104,7 +103,7 @@ The `theme.js` file will be generated under `src > Theme` folder in your project
 You can easily inspect your theme file to identify any potential errors or warnings that might have been overlooked. To inspect your theme file, simply execute the following command:
 
 ```sh
-mui-cli theme-validate [options]
+material-cli theme-validate [options]
 ```
 
 The following **options** can be passes to the command:

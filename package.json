@@ -1,5 +1,5 @@
 {
-  "name": "material-ui-cli",
+  "name": "material-cli",
   "version": "0.0.2",
   "description": "Build Material UI apps 10x faster with material-ui-cli ⚡",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "material-ui": "index.js"
+    "material-cli": "index.js"
   },
   "keywords": [
     "materialUI",
@@ -27,7 +27,6 @@
     "fs-extra": "^11.2.0",
     "joi": "^17.12.1"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/amoskyalo/material-UI-CLI.git"

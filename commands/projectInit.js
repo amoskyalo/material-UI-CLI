@@ -38,8 +38,7 @@ async function projectInit(projectName, components, architecture, tool, monorepo
             //             required: true,
             //             pageSize: 10
             //         });
-
-               
+            // new ComponentGenerator(components, projectName, architecture, tool, monorepoName).generateComponent();               
             // })()
 
         } catch (error) {
